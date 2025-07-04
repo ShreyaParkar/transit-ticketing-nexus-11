@@ -1,0 +1,275 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 8%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 24 100% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 75%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 25%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 24 100% 55%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 222.2 84% 4.9%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 24 100% 55%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217.2 32.6% 17.5%;
+    --sidebar-ring: 24 100% 55%;
+
+    /* Transit-specific colors with better contrast */
+    --transit-orange: 24 100% 60%;
+    --transit-orange-dark: 24 94% 48%;
+    --transit-green: 142 71% 50%;
+    --transit-red: 0 84% 65%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 8%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 24 100% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 75%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 25%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 24 100% 60%;
+    
+    --sidebar-background: 222.2 84% 4.9%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 24 100% 60%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217.2 32.6% 17.5%;
+    --sidebar-ring: 24 100% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    /* Ensure minimum contrast ratio */
+    color: hsl(var(--foreground));
+    background-color: hsl(var(--background));
+  }
+  
+  html {
+    @apply bg-background;
+  }
+  
+  /* High contrast text utilities */
+  .text-high-contrast {
+    @apply text-white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    font-weight: 500;
+  }
+
+  .text-accent-high {
+    @apply text-orange-400;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    font-weight: 600;
+  }
+
+  .text-muted-high-contrast {
+    @apply text-gray-300;
+    font-weight: 500;
+  }
+
+  .text-error-high-contrast {
+    @apply text-red-400;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  }
+
+  .text-success-high-contrast {
+    @apply text-green-400;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  }
+
+  .text-warning-high-contrast {
+    @apply text-amber-400;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  }
+  
+  .ticket-card {
+    @apply relative bg-card rounded-lg overflow-hidden shadow-md border border-border;
+  }
+  
+  .ticket-card::before {
+    content: "";
+    @apply absolute w-6 h-6 bg-background -left-3 -top-3 rounded-full;
+    box-shadow: inset -1px -1px 0 0 theme('colors.border');
+  }
+  
+  .ticket-card::after {
+    content: "";
+    @apply absolute w-6 h-6 bg-background -left-3 -bottom-3 rounded-full;
+    box-shadow: inset -1px 1px 0 0 theme('colors.border');
+  }
+  
+  .ticket-divider {
+    @apply absolute top-1/2 left-0 w-full border-t border-dashed border-muted-foreground;
+    margin-top: -0.5px;
+  }
+
+  .gradient-heading {
+    @apply bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent;
+    font-weight: 700;
+  }
+
+  /* Better contrast for form elements */
+  input, textarea, select {
+    @apply bg-gray-800 border-gray-600 text-white placeholder-gray-400;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    @apply border-orange-500 ring-orange-500;
+  }
+
+  /* Better button contrast */
+  .btn-primary {
+    @apply bg-orange-600 hover:bg-orange-700 text-white font-semibold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .btn-secondary {
+    @apply bg-gray-700 hover:bg-gray-600 text-white font-semibold border border-gray-600;
+  }
+
+  /* Responsive utilities */
+  .container {
+    @apply w-full mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Custom background patterns with better contrast */
+  .transitBg {
+    background-color: hsl(var(--background));
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0l.83.828-1.415 1.415L51.8 0h2.827zM5.373 0l-.83.828L5.96 2.243 8.2 0H5.374zM48.97 0l3.657 3.657-1.414 1.414L46.143 0h2.828zM11.03 0L7.372 3.657l1.415 1.414L13.857 0H11.03zm32.284 0l6.364 6.364-1.414 1.414L41.2 0h2.114zM17.657 0l-6.364 6.364 1.414 1.414L19.8 0h-2.143zM30 0l-9.9 9.9 1.415 1.414L30 2.828l8.485 8.485 1.414-1.414L30 0zM0 0c0 .506.077.966.213 1.365l9.585 9.585c.45.056.91.113 1.365.113.456 0 .91-.057 1.364-.113l9.587-9.585A4.025 4.025 0 0124 0H0zm20 6.364L7.878 18.485h39.244L35 6.364H20zM0 17.657l6.364 6.364L0 30.343V17.657zm60 0l-6.364 6.364L60 30.343V17.657zM0 41.97l3.657 3.657L0 49.284v-7.313zm60 0l-3.657 3.657L60 49.284v-7.313z' fill='%23ff9f4e' fill-opacity='0.15' fill-rule='evenodd'/%3E%3C/svg%3E");
+  }
+
+  .orangeGradient {
+    background: linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--primary)/0.8) 100%);
+  }
+
+  .purpleGradient {
+    background: linear-gradient(90deg, #5B3758 0%, #3A1F37 100%);
+  }
+
+  /* Better table styles with improved contrast */
+  .table-dark {
+    @apply bg-gray-900 border-gray-700;
+  }
+
+  .table-dark th {
+    @apply bg-gray-800 text-gray-200 border-gray-700 font-semibold;
+  }
+
+  .table-dark td {
+    @apply bg-gray-900 text-gray-100 border-gray-700;
+  }
+
+  /* Mobile-first responsive design */
+  @media (max-width: 640px) {
+    .container {
+      @apply px-2;
+    }
+    
+    /* Ensure text is large enough on mobile */
+    body {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .container {
+      @apply max-w-screen-md;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      @apply max-w-screen-lg;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .container {
+      @apply max-w-screen-xl;
+    }
+  }
+}
+
+/* Ensure sufficient contrast for all interactive elements */
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --muted-foreground: 215 20.2% 85%;
+    --border: 217.2 32.6% 35%;
+  }
+  
+  .text-muted-foreground {
+    @apply text-gray-200;
+  }
+}
